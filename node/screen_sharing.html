@@ -1,0 +1,67 @@
+<html id="home" lang="en">
+
+<head>
+    <script src="screenshot.js"></script>
+    <script src="firebase.js"></script>
+</head>
+
+<body>
+    <div id="first-div" class="share-me" contenteditable title="Tick checkbox to share this DIV">
+        <img src="a.jpg"/>
+    </div>
+    <script>
+		window.userID = Math.random() * 1000 << 10;
+		
+		setTimeout(shareDIV, 200);
+
+        function shareDIV() {
+            html2canvas(document.getElementById("first-div"), {
+                onrendered: function (canvas) {
+                    firebase && firebase.push({
+                        userID: userID,
+                        screenshot: canvas.toDataURL('image/png', 0.1)
+                    });
+
+                    //window.requestAnimationFrame(shareDIV);
+                    setTimeout(shareDIV, 100);
+                }
+            });
+        }
+    </script>
+
+    <br />
+
+    <div id="shared-parts-of-screen-preview" title="Your or your friend's shared DIVs are visible here."> </div>
+
+    <script>
+        function getNewImage(id) {
+            var image = new Image();
+            image.id = id;
+
+			var sharedPartsOfScreenPreview = document.getElementById('shared-parts-of-screen-preview');
+
+            sharedPartsOfScreenPreview.insertBefore(image, sharedPartsOfScreenPreview.firstChild);
+
+            return image;
+        }
+
+        var firebase = new Firebase('https://muazkh.firebaseIO.com/' + location.hash.replace('#', '') || 'Part-of-Screen-Sharing');
+
+        firebase.on("child_added", function (data) {
+            onMessage(data.val());
+        });
+
+        firebase.onDisconnect().remove();
+
+		var image = document.getElementById(window.userID);
+
+        function onMessage(data){	
+            if(!image){
+				image = getNewImage(data.userID);
+			}
+			
+            image.src = data.screenshot;
+        }
+    </script>
+</body>
+</html>

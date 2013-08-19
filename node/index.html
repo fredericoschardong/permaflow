@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> 
+	
+    <title>Holla Test</title>
+
+    <script src="jquery.js"></script>
+
+    <script src="jquery.hammer.min.js"></script>
+	<script src="resize.js"></script>
+	<script src="img-touch-canvas.js"></script>
+	
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="holla.js"></script>
+    <script src="client.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<div id="alert"></div>
+
+	<div id="fields">
+		<input id="whoAmI" type="text" placeholder="Who are you?" style="display: none;"></input>
+		<input id="whoCall" type="text" placeholder="Who do you want to call?" style="display: none;"></input>
+	</div>
+
+	<div class="video-container">
+	  <canvas id='canvas_them' class="them" style="z-index: 1; opacity: 0.3;"></canvas>
+      <video id="them" class="them" autoplay="true"></video>
+
+	  <canvas id='canvas_me' class="me" style="z-index: 1; opacity: 0.3;"></canvas>
+	  <video id="me" class="me" autoplay="true" muted="true"></video>
+
+	  <img id="image" class="high_res">
+	  <canvas id="img_canvas" class="high_res" height="363" width="384" style="position:fixed;"></canvas>
+
+	  <div id="image_stream"></div>
+    </div>
+
+	<div id="controls" style="display:block;">
+		<div id="size_div">
+			<label for="size">Size</label> 
+			<input id="size" type="range" name="points" min="1" max="3">
+		</div>
+		
+		<div id="time_div">
+			<label for="time">Time</label>
+			<input id="time" type="range" name="points" min="0" max="3">
+		</div>
+
+		<button id="remove">R</button>
+		<button id="colour">C</button>
+
+		<button id="back_video" style="display: none;">V</button>
+		<button id="sync_video" style="display: none;">DS</button>
+
+		<input type="file" id="picture" name="picture" accept="image/*" style="display:none;">
+		<button id="photo">H</button>
+
+		<div id="flip_video_div">
+			<label id="flip_video_label" for="flip_video">Flip Video</label>
+			<input type="checkbox" id="flip_video"/>
+		</div>
+
+		<div id="bitrate">Bitrate:</div>
+	</div>
+  </body>
+</html>

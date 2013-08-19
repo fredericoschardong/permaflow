@@ -1,0 +1,16 @@
+{
+  "name": "holla",
+  "version": "0.7.0",
+  "dependencies": {
+    "component/emitter": "*"
+  },
+  "main": "dist/holla.js",
+  "scripts": [
+    "dist/holla.js",
+    "dist/Client.js",
+    "dist/Call.js",
+    "dist/User.js",
+    "dist/Channel.js",
+    "dist/shims.js"
+  ]
+}
