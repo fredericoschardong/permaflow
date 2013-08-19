@@ -2,7 +2,7 @@
 
 Download the code and run this:
 
-npm install express socket.io base64id coffee-script  
+    npm install express socket.io base64id coffee-script
 
 ## Bugs
 
@@ -16,4 +16,4 @@ npm install express socket.io base64id coffee-script
 
 Go to the folder node then:
 
-node server.js  
+    node server.js
