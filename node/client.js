@@ -280,9 +280,9 @@ $(document).ready(function() {
 	rtc = holla.createClient();
 
 	$("#sync_video").click(function(){
-		if($(this).html() == "S"){
+		if($(this).html() == "D"){
 			sync = true;
-			$(this).html("DS");
+			$(this).html("S");
 
 			socket.emit("desync");
 
@@ -291,19 +291,19 @@ $(document).ready(function() {
 		else{
 			sync = false;
 
-			$(this).html("S");
+			$(this).html("D");
 			socket.emit("sync");
 		}
 	});
 
 	socket.on("desync", function(){
 		sync = true;
-		$("#sync_video").html("DS");
+		$("#sync_video").html("S");
 	});
 
 	socket.on("sync", function(){
 		sync = false;
-		$("#sync_video").html("S");
+		$("#sync_video").html("D");
 	});
 
 	socket.on("inform_name", function(data){
@@ -670,6 +670,11 @@ $(document).ready(function() {
 		}
 		else{
 			flip = "them";// + data.draw_at;
+
+			if(sync == true){
+				stopDrawing = false;
+				$("#canvas_them").css("z-index", "1");				
+			}
 		}
 
 		draw(flip, 
